@@ -1,4 +1,4 @@
-exit on error
+#exit on error
 set -o errexit
 
 bundle install
