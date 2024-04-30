@@ -1,0 +1,40 @@
+<div class="container">
+<section class="jumbotron text-center">
+<br>
+        <div class="container">
+          <p>All Products Related To Category <%= @product_category.name %></p>
+        </div>
+      </section>
+      <hr>
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+
+            <% @products.each do |product| %> 
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+              <% if product.image.attached? %>
+                <%= link_to image_tag(product.image, class:"card-img-top"), product %>
+              <% end %>
+                <div class="card-body">
+                  <h5><%= link_to product.name, product %></h5>
+                  <p class="card-text"><%= truncate(product.description, :lenght => 100) %></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                    </div>
+                    <small class="text-muted"><%= product.price %></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+           <% end %>
+
+
+          </div>
+        </div>
+      </div>
+
+</div>
+

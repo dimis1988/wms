@@ -11,7 +11,8 @@
 
 					</div>
 					<div class="details col-md-6">
-            <br>
+					<div class="container">
+                    <br>
 						<h3 class="product-title"><%= @product.name %></h3>
 						<div class="rating">
 							<div class="stars">
@@ -24,12 +25,15 @@
 							<span class="review-no">41 reviews</span>
 						</div>
 						<p class="product-description"><%= @product.description %></p>
-						<h4 class="price">current price: <span><%= @product.price %></span></h4>
+						<h4 class="price">Price: <span><%= @product.price %></span></h4>
+						<p class="vote"><strong>Category: </strong> <%= @product.product_category.name %> <strong></strong></p>
 						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 						<div class="action">
 							<button type="button" class="btn btn-primary">Add to Cart</button>
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 						</div>
+					   <br>
+                    </div>
 					</div>
 				</div>
 			</div>
