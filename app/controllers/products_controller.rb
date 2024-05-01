@@ -1,10 +1,13 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_admin , only: %i[ new create edit update destroy ]
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
   def index
     @products = Product.paginate(page: params[:page], per_page: 3)
   end
+
 
   # GET /products/1 or /products/1.json
   def show
@@ -58,6 +61,14 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def authorize_admin
+    unless current_user && current_user.admin?
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to root_path
+    end
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
