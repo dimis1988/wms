@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a><%= link_to 'E-Com', root_path,  class: "navbar-brand" %></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a><%= link_to 'Home', root_path,  class: "nav-link" %></a>
+        </li>
+        <li class="nav-item">
+          <a><%= link_to 'About', about_path,  class: "nav-link" %></a>
+        </li>
+        <li class="nav-item">
+          <a><%= link_to 'Products', products_path,  class: "nav-link" %></a>
+        </li>
+          <li class="nav-item">
+          <a><%= link_to 'Categories', product_categories_path,  class: "nav-link" %></a>
+        </li>
+     </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+   <ul class="navbar-nav">
+    <% if current_user %>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= current_user.full_name %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+            <li><a><%= link_to 'Edit Account', edit_user_registration_path, class:"dropdown-item" %></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <% if current_user.admin? %>
+            <li><a><%= link_to 'Admin', admin_root_path, class:"dropdown-item" %></a></li>
+            <% end %>
+            <li><a><%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class:"dropdown-item" %></a></li>
+          </ul>
+        </li>
+    <% else %>
+        <li class="nav-item">
+          <a><%= link_to 'Sign Up', new_user_registration_path, class:"nav-link" %></a>
+        </li>
+        <li class="nav-item">
+          <a><%= link_to 'Log In', new_user_session_path, class:"nav-link" %></a>
+        </li>
+    <% end %>
+    </ul>
+
+    </div>
+  </div>
+</nav>

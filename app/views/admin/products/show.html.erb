@@ -29,8 +29,8 @@
 						<p class="vote"><strong>Category: </strong> <%= @product.product_category.name %> <strong></strong></p>
 						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 						<div class="action">
-							<button type="button" class="btn btn-primary">Add to Cart</button>
-							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+						    <%= link_to "Edit", edit_admin_product_path(@product), class:"btn btn-primary" %>
+						    <%= button_to "Destroy", admin_product_path(@product), method: :delete, class:"btn btn-danger" %> 
 						</div>
 					   <br>
                     </div>
