@@ -1,0 +1,57 @@
+
+<div class="container">
+<section class="jumbotron text-center">
+<br>
+        <div class="container">
+          <h3 class="display-6">All Products</h3>
+          <p>Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+        </div>
+      </section>
+      <hr>        
+      <%= link_to 'New Product', new_admin_product_path, class:"btn btn-primary btn-md" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+      <th scope="col">Actions</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+    <tr>
+      <th scope="row"><%= product.id %></th>
+      <td><%= link_to product.name, admin_product_path(product) %></td>
+      <td><%= truncate(product.description, :lenght => 50) %></td>
+      <td><%= product.product_category.name %></td>
+      <td><%= product.price %></td>
+      <td><%= link_to "Details", admin_product_path(product), class:"btn btn-primary btn-sm" %></td>
+      <td><%= link_to "Edit", edit_admin_product_path(product), class:"btn btn-primary btn-sm" %></td>
+      <td><%= button_to "Delete", product, method: :delete, class:"btn btn-danger btn-sm" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+        <div class="col-lg-12 text-center">
+          <div class="apple_pagination">
+            <div class="page_info">
+             <%= page_entries_info @products %>
+            </div>
+            <%= will_paginate @products, :container => false %>
+          </div>
+        </div>
+
+          </div>
+        </div>
+      </div>
+
+</div>
+
