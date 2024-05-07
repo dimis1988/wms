@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  get 'carts/show'
+
   namespace :admin do
     root 'admin#index'
     resources :products
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   get '/about', to: 'pages#about'
   resources :products, only: [:index, :show]
   resources :product_categories
+  resources :line_items
+  resources :carts
 
   get "up" => "rails/health#show", as: :rails_health_check
 
