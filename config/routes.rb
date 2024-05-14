@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  get 'carts/show'
-
+  
   namespace :admin do
     root 'admin#index'
     resources :products
     resources :product_categories
     resources :users
+    resources :line_items
+    resources :orders
   end
 
   devise_for :users, controllers: {
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
   resources :product_categories
   resources :line_items
   resources :carts
+  resources :orders
+  get '/checkout', to: 'checkout#index'
 
   get "up" => "rails/health#show", as: :rails_health_check
 

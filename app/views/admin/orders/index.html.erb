@@ -1,0 +1,45 @@
+
+<div class="container">
+<section class="jumbotron text-center">
+<br>
+        <div class="container">
+          <h3 class="display-6">All Orders</h3>
+          <p>Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+        </div>
+      </section>
+      <hr>        
+      <!--<%= link_to 'New Order', new_admin_order_path, class:"btn btn-primary btn-md" %>-->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#id</th>
+      <th scope="col">User</th>
+      <th scope="col">Total Price</th>
+      <th scope="col"></th>
+      <th scope="col">Actions</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <th scope="row"><%= order.id %></th>
+      <td><%= link_to order.user.full_name, admin_order_path(order) %></td>
+      <td>$<%= order.total_price %></td>
+      <td><%= link_to "Details", admin_order_path(order), class:"btn btn-primary btn-sm" %></td>
+      <td><%= link_to "Edit", edit_admin_order_path(order), class:"btn btn-primary btn-sm" %></td>
+      <td><%= button_to "Delete", order, method: :delete, class:"btn btn-danger btn-sm" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+          </div>
+        </div>
+      </div>
+
+</div>
+
