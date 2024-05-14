@@ -3,6 +3,7 @@ class Product < ApplicationRecord
     before_save :capitalize_name_and_description
     belongs_to :product_category
     has_many :line_items
+    has_many :orders, through: :line_items
     default_scope { order('created_at DESC') }
 
     def capitalize_name_and_description
