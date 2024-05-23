@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :orders
+  has_many :orders, dependent: :destroy
   
   def full_name
     "#{first_name.capitalize}  #{last_name.capitalize}"

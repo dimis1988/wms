@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a><%= link_to 'E-Com', root_path,  class: "navbar-brand" %></a>
@@ -19,6 +20,19 @@
           <a><%= link_to 'Categories', product_categories_path,  class: "nav-link" %></a>
         </li>
      </ul>
+
+        <div class="cart-icon">
+          <%= link_to cart_path(@cart) do %>
+            <i class="fa fa-shopping-cart fa-2x" style="color: green;"></i>
+            <% if @cart.line_items.any? %>
+              <span class="cart-badge"><%= @cart.line_items.size %></span>
+            <% else %>
+              <span class="cart-badge">0</span>
+            <% end %>
+          <% end %>
+        </div>
+
+      
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
