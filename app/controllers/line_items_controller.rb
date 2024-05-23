@@ -20,8 +20,8 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: "Product was successfully added to cart." }
-        format.json { render :show }
+        format.html { redirect_to product_path(product), notice: "Product was successfully added to cart." }
+        format.js  { @item = @line_item }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }

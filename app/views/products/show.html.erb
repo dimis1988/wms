@@ -25,20 +25,19 @@
 							<span class="review-no">41 reviews</span>
 						</div>
 						<p class="product-description"><%= @product.description %></p>
-						<h4 class="price">Price: <span><%= @product.price %></span></h4>
+						<h4 class="price">Price: <span><%= format_price(@product.price) %></span></h4>
 						<p class="vote"><strong>Category: </strong> <%= @product.product_category.name %> <strong></strong></p>
 						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
 						<div class="action">
 						
-                            <%= form_with url: line_items_path, method: :post do |f| %>
+                            <%= form_with url: line_items_path, method: :post, remote: true do |f| %>
 							  <%= f.hidden_field :product_id, value: @product.id %>
-                              <%= f.number_field  :quantity, min: 1  %>
+                                 <%= f.text_field  :quantity, min: 1 , value: 1, class: "form-control", style: "width: 90px;"  %>
 							  <br>
 							  <br>
 							  <%= f.submit 'Add to Cart', class:"btn btn-primary" %>
                             <% end %>
 
-							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 						</div>
 					   <br>
                     </div>

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
+    include CurrentCart
+    before_action :set_cart
+    
     protected 
 
     def after_sign_in_path_for(resource)

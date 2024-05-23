@@ -9,13 +9,13 @@
             <div class="col-md-12">
                 <div class="product-details mr-2">
                     <div class="d-flex flex-row align-items-center">
-                    <i class="fa fa-long-arrow-left"></i><span><%= link_to 'Continue Shopping', products_path %></span>
+                    <span><%= link_to 'Continue Shopping', products_path %></span>
                     </div>
                     <hr>
                     <h6 class="mb-0">Shopping cart</h6>
                     <div class="d-flex justify-content-between"><span>You have <%= @cart.line_items.count %> items in your cart</span>
                         <div class="d-flex flex-row align-items-center"><span class="text-black-50">Quantity/</span>
-                            <div class="price ml-2"><span class="mr-1">price</span><i class="fa fa-angle-down"></i></div>
+                            <div class="price ml-2"><span class="mr-1">price</span></div>
                         </div>
                     </div>
 
@@ -28,8 +28,7 @@
                             <div class="ml-2"><span class="font-weight-bold d-block"><%= li.product.name %></span></div>
                         </div>
                         <div class="d-flex flex-row align-items-center">
-                          <span class="d-block"><%= li.quantity %>* $</span> <span class="d-block ml-5 font-weight-bold"> <%= li.product.price %></span>
-                          <i class="fa fa-trash-o ml-3 text-black-50"></i>
+                          <span class="d-block"><%= li.quantity %>* </span> <span class="d-block ml-5 font-weight-bold"> <%= format_price(li.product.price) %></span>
                         </div>
                     </div>
                     <hr>
@@ -37,10 +36,18 @@
 
                 </div>
                 </div>
-                <p style="text-align: right;">Total Price: $<%= @cart.total_price %></p>
+                <p style="text-align: right;">Total Price: <%= format_price(@cart.total_price) %></p>
 
-                <%= button_to 'Checkout', new_order_path, method: :get, class:"btn btn-primary btn-md" %>            
+               <div class="button-container">
+                    <% unless  !@cart.line_items.any? %>
+                      <%= button_to 'Checkout', new_order_path, method: :get, class:"btn btn-primary btn-md" %>
+                      <%= button_to 'Delete Card', cart_path(@cart), method: :delete, class:"btn btn-danger btn-md" %>
+                    <% end %>
+                </div>
+
             </div>
             </div>
         </div>
     </div>
+
+
