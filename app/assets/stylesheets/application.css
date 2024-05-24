@@ -37,3 +37,18 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .container-search {
+    padding: 2rem 0rem;
+  }
+  
+
+  .table-image {
+    td, th {
+      vertical-align: middle;
+    }
+  }
+  .w-25 img {
+    max-width: 60%;
+    height: auto;
+  }

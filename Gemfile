@@ -70,3 +70,4 @@ end
 gem 'will_paginate', '~> 4.0'
 gem "devise", "~> 4.9"
 gem 'aws-sdk', '~> 3', require: false
+gem 'ransack'

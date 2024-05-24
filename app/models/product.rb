@@ -10,4 +10,12 @@ class Product < ApplicationRecord
        self.name = name.capitalize
        self.description = description.capitalize
     end 
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["active", "created_at", "description", "id", "id_value", "name", "price", "product_category_id", "updated_at"]
+      end
+
+      def self.ransackable_associations(auth_object = nil)
+        ["image_attachment", "image_blob", "line_items", "orders", "product_category"]
+      end
 end

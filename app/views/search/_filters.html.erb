@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header">
+    Filters
+  </div>
+  <div class="card-body">
+    <%= search_form_for(@q, url: search_path) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name_cont, class: 'form-control', placeholder: 'Product name' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price, "Price" %>
+        <div class="row">
+          <div class="col">
+            <%= f.text_field :price_gteq, class: 'form-control', placeholder: 'min' %>
+          </div>
+          <div class="col">
+            <%= f.text_field :price_lteq, class: 'form-control', placeholder: 'max' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :product_category_id %>
+        <%= f.select :product_category_id_eq, ProductCategory.all.map { |cat| [cat.name, cat.id] }, { prompt: "Select Category" }, { class: "form-control" } %>
+      </div>
+
+      <br>
+      <div class="form-group">
+        <div class="float-right">
+          <%= link_to "Clear", request.path, :class => "btn btn-default" %>
+
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

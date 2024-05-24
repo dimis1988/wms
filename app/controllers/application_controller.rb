@@ -2,6 +2,12 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
     include CurrentCart
     before_action :set_cart
+    before_action :set_q_for_ransack
+
+    def set_q_for_ransack
+      @q = Product.ransack(params[:q])
+    end
+
     
     protected 
 

@@ -7,4 +7,8 @@ class ProductCategory < ApplicationRecord
     def capitalize_name
       self.name = name.capitalize
     end
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["active", "created_at", "id", "id_value", "name", "updated_at"]
+    end
 end

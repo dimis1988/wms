@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :carts
   resources :orders
   get '/checkout', to: 'checkout#index'
+  get '/search', to: 'search#index'
+
 
   get "up" => "rails/health#show", as: :rails_health_check
 
