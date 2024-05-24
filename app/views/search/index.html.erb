@@ -1,0 +1,64 @@
+
+
+
+<div class="container">
+<section class="jumbotron text-center">
+<br>
+        <div class="container">
+          <h3 class="display-6"><%= pluralize(@products.count, "Result") %></h3>
+          <p><%= link_to "Clear Results", request.path, :class => "btn btn-primary" %></p>          
+
+        </div>
+      </section>
+      <hr>
+
+
+<div class="row">
+  <div class="col-3">
+    <%= render 'filters' %>
+  </div>
+
+  <div class="col-9">
+
+		<table class="table table-image">
+		  <thead>
+		    <tr>
+		      <th scope="col">Photo</th>
+		      <th scope="col"><%= sort_link(@q, :name) %></th>
+		      <th scope="col">Short Description</th>
+		      <th scope="col"><%= sort_link(@q, :product_category_id) %></th>
+		      <th scope="col"><%= sort_link(@q, :price) %></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+
+          <% @products.each do |product| %> 
+		    <tr>
+		      <td class="w-25">
+              <% if product.image.attached? %>
+                <%= link_to image_tag(product.image, class:"img-fluid img-thumbnail"), product %>
+              <% end %>
+		      </td>
+		      <td><%= link_to product.name, product %></td>
+		      <td><%= truncate(product.description, :lenght => 100) %></td>
+		      <td><%= product.product_category.name %></td>
+		      <td><%= format_price(product.price) %></td>
+		    </tr>
+          <% end %>
+
+		  </tbody>
+		</table>   
+
+          <div class="col-lg-12 text-center">
+          <div class="apple_pagination">
+            <div class="page_info">
+             <%= page_entries_info @products %>
+            </div>
+            <%= will_paginate @products, :container => false %>
+          </div>
+        </div>
+
+
+  </div>
+</div>
+</div>
