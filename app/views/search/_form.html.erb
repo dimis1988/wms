@@ -4,5 +4,4 @@
                                     debounce_target: 'form',
                                     turbo_frame: 'search' } ) do |f| %>
           <%= f.search_field :name_or_product_category_name_cont, autocomplete: "off", data: { action: "input->debounce#search"} ,class: "form-control me-2", placeholder:"Search" %>
-          <%= f.submit class:"btn btn-outline-success" %>
       <% end %>

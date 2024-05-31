@@ -3,10 +3,18 @@ class Admin::OrdersController < Admin::AdminController
   before_action :set_cart, only: [:new, :create]
 
   def index
-    @orders = Order.all
+    @q = Order.ransack(params[:q])
+    @orders = @q.result.paginate(page: params[:page], per_page: 10)
   end
 
   def show
+    @order = Order.find(params[:id])
+  end
+
+  def update_status
+    @order = Order.find(params[:id])
+    @order.update(status: params[:status])
+    redirect_to admin_order_path(@order), notice: "Status was successfully updated."
   end
 
   def new

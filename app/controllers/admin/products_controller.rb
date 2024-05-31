@@ -3,7 +3,8 @@ class Admin::ProductsController < Admin::AdminController
 
   # GET /products or /products.json
   def index
-    @products = Product.paginate(page: params[:page], per_page: 3)
+    @q = Product.ransack(params[:q])
+    @products = @q.result.includes(:product_category).paginate(page: params[:page], per_page: 10)
   end
 
 

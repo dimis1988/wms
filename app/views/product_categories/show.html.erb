@@ -22,7 +22,7 @@
                   <p class="card-text"><%= truncate(product.description, :lenght => 100) %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
+                      <%= link_to 'Details', product, class:"btn btn-sm btn-primary" %>
                     </div>
                     <small class="text-muted"><%= format_price(product.price) %></small>
                   </div>
