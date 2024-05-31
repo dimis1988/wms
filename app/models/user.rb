@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :orders, dependent: :destroy
+  default_scope { order('created_at DESC')}
   
   def full_name
     "#{first_name.capitalize}  #{last_name.capitalize}"

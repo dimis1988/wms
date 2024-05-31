@@ -17,7 +17,8 @@
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Category</th>
-      <th scope="col">Price</th>
+      <th scope="col"><%= sort_link(@q, :price) %></th>
+      <th scope="col">Active</th>
       <th scope="col"></th>
       <th scope="col">Actions</th>
       <th scope="col"></th>
@@ -31,6 +32,13 @@
       <td><%= truncate(product.description, :lenght => 50) %></td>
       <td><%= product.product_category.name %></td>
       <td><%= product.price %></td>
+      <td>
+      <% if product.active %>
+        <i class="fa fa-check" style="color: green;"></i>
+            <% else %>
+        <i class="fa fa-times" style="color: red;"></i>
+      <% end %>
+      </td>
       <td><%= link_to "Details", admin_product_path(product), class:"btn btn-primary btn-sm" %></td>
       <td><%= link_to "Edit", edit_admin_product_path(product), class:"btn btn-primary btn-sm" %></td>
       <td><%= button_to "Delete", product, method: :delete, class:"btn btn-danger btn-sm" %></td>

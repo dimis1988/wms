@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     resources :product_categories
     resources :users
     resources :line_items
-    resources :orders
+    resources :orders do
+      member do 
+        patch :update_status
+      end
+    end
   end
 
   devise_for :users, controllers: {

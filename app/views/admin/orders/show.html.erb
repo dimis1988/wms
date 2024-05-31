@@ -1,0 +1,88 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card border-top border-bottom border-3">
+          <div class="card-body p-5">
+
+            <p class="lead fw-bold mb-5">User: <%= @order.user.full_name %></p>
+
+            <div class="row">
+              <div class="col mb-3">
+                <p class="small text-muted mb-1">Date</p>
+                <p><%= @order.created_at.strftime("%m/%d/%Y") %></p>
+              </div>
+              <div class="col mb-3">
+                <p class="small text-muted mb-1">Order No.</p>
+                <p><%= @order.id %></p>
+              </div>
+            </div>
+
+            <div class="mx-n5 px-5 py-4">
+            
+            
+              <div class="row">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Pirce</th>
+                        <th scope="col">Total Price</th>
+                     </tr>
+                   </thead>
+                    <tbody>
+                    <% @order.line_items.each do |line_item| %>
+                      <tr>
+                        <th scope="row"><%= line_item.quantity %></th>
+                        <td><%= line_item.product.name %></td>
+                        <td><%= line_item.product.price %></td>
+                        <td><%= line_item.total_price %></td>
+                      </tr>
+                    <% end %>
+                   </tbody>
+                </table>
+              </div>
+
+            </div>
+
+            <div class="row my-4">
+              <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+                <p class="lead fw-bold mb-0" style="color: #5cb85c">Amount: <%= format_price(@order.total_price) %></p>
+              </div>
+            </div>
+
+            <p class="lead fw-bold mb-4 pb-2" style="color: #5cb85c">Tracking Order: <%= @order.status.capitalize %></p>
+
+            <div class="row">
+              <div class="col-lg-12">
+
+                <div class="horizontal-timeline">
+
+                  <ul class="list-inline items d-flex justify-content-between">
+
+                  <% Order.all_order_status.each do |status| %>
+                    <li class="list-inline-item items-list">
+                      <% status_value = Order.statuses[status] %>
+                       <% current_status_value = Order.statuses[@order.status] %>
+                        <% if status_value <= current_status_value %>
+                          <%= button_to status, update_status_admin_order_path(@order, status: status), method: :patch, class:"py-1 px-2 rounded text-white", style:"background-color: #5cb85c" %>
+                        <% else %>
+                          <%= button_to status, update_status_admin_order_path(@order, status: status), method: :patch, class: "py-1 px-2 rounded text-white", style: "background-color: #0000FF" %>
+                        <% end %>
+                    </li>
+                  <% end %>
+
+                  </ul>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+        
