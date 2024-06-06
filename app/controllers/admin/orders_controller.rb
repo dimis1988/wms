@@ -4,7 +4,7 @@ class Admin::OrdersController < Admin::AdminController
 
   def index
     @q = Order.ransack(params[:q])
-    @orders = @q.result.paginate(page: params[:page], per_page: 10)
+    @orders = @q.result.order('created_at DESC').paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -24,6 +24,13 @@ class Admin::OrdersController < Admin::AdminController
   end
 
   def create
+  end
+
+  def destroy
+    @order = Order.find(params[:id])
+    @line_items = LineItem.find(params[:id])
+    @order.destroy!
+    redirect_to admin_orders_path, notice: "Order was successfully deleted."
   end
 
 

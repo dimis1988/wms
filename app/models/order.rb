@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
     has_many :line_items, dependent: :destroy
     belongs_to :user, optional: true
-    default_scope { order('created_at DESC') }
+    #default_scope { order('created_at DESC') }
     enum :status, { ordered: 0, proceeded: 1, cancelled: 2, refunded: 3, paid: 4 }
 
     def self.all_order_status
