@@ -73,3 +73,4 @@ gem 'aws-sdk', '~> 3', require: false
 gem 'ransack'
 gem "chartkick"
 gem 'groupdate'
+gem 'stripe'

@@ -1,0 +1,14 @@
+
+var stripe = Stripe('<%= Rails.application.credentials[:stripe][:publishable_key] %>');
+stripe.redirectToCheckout({ sessionId: '<%= @session.id %>' });
+
+<!--
+// app/views/payments/create.js.erb
+const sessionId = "<%= @session.id %>";
+const stripe = Stripe('<%= Rails.application.credentials[:stripe][:publishable_key] %>');
+
+stripe.redirectToCheckout({ sessionId: sessionId }).then(function (result) {
+  if (result.error) {
+    alert(result.error.message);
+  }
+});
