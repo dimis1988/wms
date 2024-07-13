@@ -31,7 +31,7 @@
 
           <div class="row">
 
-            <% @products.each do |product| %> 
+            <% @products.with_attached_image.each do |product| %> 
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
               <% if product.image.attached? %>

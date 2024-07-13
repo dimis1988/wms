@@ -2,7 +2,7 @@ class Admin::AdminController < ApplicationController
   before_action :authorize_admin
 
   def index
-    @last_five_paid_orders = Order.where(status: 'paid').order('created_at DESC').limit(5)
+    @last_five_paid_orders = Order.where(status: 'paid').order('created_at DESC').limit(5).includes(:user)
     @most_sold_products = 
     Product.joins(:line_items)
     .select('products.*, SUM(line_items.quantity) as total_quantity')

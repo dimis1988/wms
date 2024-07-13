@@ -4,7 +4,7 @@ class Admin::OrdersController < Admin::AdminController
 
   def index
     @q = Order.ransack(params[:q])
-    @orders = @q.result.order('created_at DESC').paginate(page: params[:page], per_page: 10)
+    @orders = @q.result.order('created_at DESC').paginate(page: params[:page], per_page: 10).includes(:user)
   end
 
   def show
