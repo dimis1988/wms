@@ -31,13 +31,25 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        format.html { redirect_to root_path, notice: "Order was successfully created." }
+        customer = Stripe::Customer.create({
+          :email => params[:stripeEmail],
+          :source => params[:stripeToken]
+        })
+        
+        charge = Stripe::Charge.create({
+          :customer => customer.id,
+          :amount => (@cart.total_price * 100).to_i,
+          :description => 'Description of your product',
+          :currency => 'eur'
+        })
+        format.html { redirect_to root_path, notice: "Payment was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
 

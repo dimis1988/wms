@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   resources :orders
+  resources :payments, only: [:new, :create]
+  post 'payments/create', to: 'payments#create'
+
   get '/checkout', to: 'checkout#index'
   get '/search', to: 'search#index'
 

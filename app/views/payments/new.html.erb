@@ -1,0 +1,36 @@
+      <div class="py-5 text-center">
+        <h2>Checkout</h2>
+        <p class="lead">Below is an example form built entirely with Bootstrap's form controls.</p>
+      </div>
+
+
+<div class="container">
+   <div class="card">
+           <div class="card-body">
+<!----
+<p>Order ID: <%= @order.id %></p>
+
+
+<%= button_to 'Pay now!', payments_create_path(order_id: @order.id), remote: true,  class:"btn btn-primary" %>
+--->
+
+
+<%= form_tag payments_create_path(order_id: @order.id) do %>
+
+  <label class="amount">
+      <span>Amount: <%= format_price(@order.total_price) %></span>
+  </label>
+
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-description="A month's subscription"
+    data-amount="<%= format_price(@order.total_price * 100).to_i %>"
+    data-locale="auto">
+  </script>
+<% end %>
+
+
+      </div>
+      </div>
+</div>

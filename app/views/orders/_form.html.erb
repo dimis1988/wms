@@ -1,5 +1,4 @@
 
-
 <%= form_with model: @order do |form| %>
 
 
@@ -37,21 +36,31 @@
             </li>
 --->
             <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
+              <span>Total (EUR)</span>
               <strong><%= format_price(@cart.total_price) %></strong>
             </li>
           </ul>
 
-<!---
+
           <form class="card p-2">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Promo code">
               <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
+
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-description="A month's subscription"
+    data-amount="<%= format_price(@cart.total_price * 100).to_i %>"
+    data-currency="eur"
+    data-locale="auto">
+  </script>
+              
+                <%= form.submit 'Continue to payment', class:"btn btn-primary", :style => "display: none;" %>
               </div>
             </div>
           </form>
---->
+
         </div>
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Billing Details</h4>
@@ -69,7 +78,6 @@
             </div>
 
             <hr class="mb-4">
-            <%= form.submit 'Continue to payment', class:"btn btn-primary" %>
         </div>
       </div>
       </div>
