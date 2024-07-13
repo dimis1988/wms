@@ -3,7 +3,7 @@ class ProductCategoriesController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @product_categories = ProductCategory.all
+    @product_categories = ProductCategory.includes(:products)
   end
 
   # GET /products/1 or /products/1.json

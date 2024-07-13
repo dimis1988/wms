@@ -32,7 +32,7 @@
 		  </thead>
 		  <tbody>
 
-          <% @products.each do |product| %> 
+          <% @products.with_attached_image.each do |product| %> 
 		    <tr>
 		      <td class="w-25">
               <% if product.image.attached? %>
